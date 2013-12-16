@@ -78,5 +78,7 @@ grails.project.dependency.resolution = {
 
         compile ":spring-security-core:2.0-RC2"
         compile ":spring-security-bcrypt:0.3"
+
+        compile ":faker:0.7"
     }
 }

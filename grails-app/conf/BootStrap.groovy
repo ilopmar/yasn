@@ -1,10 +1,12 @@
+import yasn.relation.FollowRelation
+import yasn.timeline.Timeline
 import yasn.user.Role
 import yasn.user.User
 import yasn.user.UserRole
 
-import yasn.relation.FollowRelation
-
 class BootStrap {
+
+    def fakerService
 
     def init = { servletContext ->
         this.createDummyData()
@@ -22,7 +24,12 @@ class BootStrap {
             def tmpUser = new User(username: "user${n}", password: 'pass').save(flush: true, failOnError: true)
             UserRole.create(tmpUser, role)
 
-            def fr = new FollowRelation(user: user, follower: tmpUser).save(flush: true, failOnError: true)
+            new FollowRelation(user: user, follower: tmpUser).save(flush: true, failOnError: true)
+        }
+
+        50.times { n ->
+            def rndUser = User.executeQuery('from User order by random()', [max: 1])
+            new Timeline(user: rndUser, content: fakerService.paragraph(1)).save(flush: true, failOnError: true)
         }
     }
 }
