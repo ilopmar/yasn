@@ -77,7 +77,6 @@ grails.project.dependency.resolution = {
         compile ":postgresql-extensions:0.6.1"
 
         compile ":spring-security-core:2.0-RC2"
-        compile ":spring-security-bcrypt:0.3"
 
         compile ":faker:0.7"
     }
