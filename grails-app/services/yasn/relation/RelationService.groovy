@@ -4,13 +4,15 @@ import yasn.user.User
 import yasn.ro.FollowRequest
 
 class RelationService {
+    def yasnRedisService
 
     void addFollower(User follower, User user) {
         FollowRelation.findOrSaveByFollowerAndUser(follower, user)
     }
 
-    Boolean isFollower(User follower, User User) {
-        return FollowRelation.countByFollowerAndUser(follower, user) > 0
+    Boolean isFollower(User follower, User user) {
+        // return FollowRelation.countByFollowerAndUser(follower, user) > 0
+        return yasnRedisService.isFollower(follower, user)
     }
 
     FollowRequest doAddFollower(FollowRequest followRequest) {
@@ -19,10 +21,9 @@ class RelationService {
         followRequest
     }
 
-    FollowRequest doUpdateFollowers(FollowRequest followRequest) {
-        sleep 3000
+    void doUpdateFollowers(FollowRequest followRequest) {
         println "Updating followers of ${followRequest.user} with ${followRequest.follower}"
 
-        followRequest
+        yasnRedisService.addFollower(followRequest.follower, followRequest.user)
     }
 }
