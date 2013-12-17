@@ -5,8 +5,7 @@ import yasn.user.User
 class RelationService {
 
     void addFollower(User user, User follower) {
-        def relation = new FollowRelation(user: user, follower: follower)
-        relation.save()
+        FollowRelation.findOrSaveByUserAndFollower(user, follower)
     }
 
     Boolean isFollower(User user, User follower) {
