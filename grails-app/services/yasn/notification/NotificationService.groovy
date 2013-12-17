@@ -2,6 +2,7 @@ package yasn.notification
 
 import yasn.user.User
 import yasn.ro.FollowRequest
+import yasn.ro.PublishRequest
 
 class NotificationService {
     static transactional = false
@@ -11,6 +12,13 @@ class NotificationService {
         println "Notifying ${followRequest.user} his new follower ${followRequest.follower}"
 
         followRequest
+    }
+
+    PublishRequest doUpdateFollowersTimeline(PublishRequest publishRequest) {
+        sleep 2000
+        println "Updating ${publishRequest.user} followers' timelines"
+
+        publishRequest
     }
 
 }

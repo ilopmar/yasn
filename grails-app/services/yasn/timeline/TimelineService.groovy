@@ -1,6 +1,7 @@
 package yasn.timeline
 
 import yasn.user.User
+import yasn.ro.PublishRequest
 
 class TimelineService {
 
@@ -9,5 +10,11 @@ class TimelineService {
         tl.save()
 
         tl
+    }
+
+    PublishRequest doAddTimeline(PublishRequest publishRequest) {
+        publishRequest.timeline = this.addTimeline(publishRequest.user, publishRequest.content)
+
+        publishRequest
     }
 }

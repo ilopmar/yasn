@@ -12,4 +12,7 @@
     <!-- New follower flow -->
     <beans:import resource="new-follower-flow.xml"/>
 
+    <!-- Publish flow -->
+    <beans:import resource="publish-flow.xml"/>
+
 </beans:beans>

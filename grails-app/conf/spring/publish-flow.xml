@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+             http://www.springframework.org/schema/integration
+             http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+    <channel id="publish-ch"/>
+
+    <gateway id="publishPipeline"
+            default-request-channel="publish-ch"
+            service-interface="yasn.pipeline.Publish" />
+
+    <chain input-channel="publish-ch">
+        <recipient-list-router apply-sequence="true">
+            <recipient channel="publish-content-channel" />
+            <recipient channel="update-follower-timelines-channel" />
+        </recipient-list-router>
+    </chain>
+
+    <channel id="publish-content-channel" />
+    <service-activator input-channel="publish-content-channel" ref="timelineService" method="doAddTimeline" />
+
+    <channel id="update-follower-timelines-channel">
+        <queue capacity="10" />
+    </channel>
+    <service-activator input-channel="update-follower-timelines-channel" ref="notificationService" method="doUpdateFollowersTimeline" />
+
+</beans:beans>
