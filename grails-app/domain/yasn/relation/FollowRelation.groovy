@@ -4,11 +4,11 @@ import yasn.user.User
 
 class FollowRelation {
 
-    User user
+    // The 'follower' follows 'user'
     User follower
+    User user
 
     Date dateCreated
-    Date lastUpdated
 
     static constraints = {
         // A user can not have any relationship with himself
