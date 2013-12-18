@@ -26,6 +26,6 @@
     <channel id="update-follower-timelines-channel">
         <queue capacity="10" />
     </channel>
-    <service-activator input-channel="update-follower-timelines-channel" ref="notificationService" method="doUpdateFollowersTimeline" />
+    <service-activator input-channel="update-follower-timelines-channel" ref="timelineService" method="doUpdateFollowersTimeline" />
 
 </beans:beans>
