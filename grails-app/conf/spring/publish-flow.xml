@@ -24,7 +24,7 @@
     <service-activator input-channel="publish-content-channel" ref="timelineService" method="doAddTimeline" />
 
     <channel id="update-follower-timelines-channel">
-        <queue capacity="10" />
+        <queue />
     </channel>
     <service-activator input-channel="update-follower-timelines-channel" ref="timelineService" method="doUpdateFollowersTimeline" />
 

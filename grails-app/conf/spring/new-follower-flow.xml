@@ -25,12 +25,12 @@
     <service-activator input-channel="new-follower-channel" ref="relationService" method="doAddFollower" />
 
     <channel id="notify-follower-channel">
-        <queue capacity="10" />
+        <queue />
     </channel>
     <service-activator input-channel="notify-follower-channel" ref="notificationService" method="doNotifyFollower" />
 
     <channel id="update-followers-channel">
-        <queue capacity="10" />
+        <queue />
     </channel>
     <service-activator input-channel="update-followers-channel" ref="relationService" method="doUpdateFollowers" />
 
