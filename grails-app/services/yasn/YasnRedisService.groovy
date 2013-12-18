@@ -48,4 +48,8 @@ class YasnRedisService {
         println "Getting followers of ${user}"
         return redisService.smembers("followers.${user.id}")
     }
+
+    def timeline(Long userId, Integer start, Integer stop) {
+        redisService.lrange("timeline.${userId}", start, stop)
+    }
 }

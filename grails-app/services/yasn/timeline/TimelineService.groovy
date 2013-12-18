@@ -5,6 +5,8 @@ import yasn.ro.PublishRequest
 
 class TimelineService {
 
+    private static final Integer ITEMS_BY_PAGE = 10
+
     def yasnRedisService
 
     Timeline addTimeline(User user, String content) {
@@ -26,6 +28,19 @@ class TimelineService {
         yasnRedisService.updateTimeline(publishRequest.user, publishRequest.timeline)
 
         publishRequest
+    }
+
+    List<Timeline> timeline(User user, Integer page = 0) {
+        def start = page * ITEMS_BY_PAGE
+        def end = start + ITEMS_BY_PAGE - 1
+
+        def redisTl = yasnRedisService.timeline(user.id, start, end)
+
+        def timeline = Timeline.withCriteria {
+            'in' 'id', redisTl.collect { Long.valueOf(it) }
+        }
+
+        return timeline
     }
 
 }
