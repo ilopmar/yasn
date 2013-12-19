@@ -7,5 +7,5 @@
     <span class="username">@${user.username}</span>
     <span class="time"><prettytime:display date="${timeline.dateCreated}" /></span>
 
-    <p>${timeline.content}</p>
+    <p><yasn:parseTextToLink text="${timeline.content}" /></p>
 </div>
