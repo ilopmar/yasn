@@ -51,4 +51,8 @@ class TimelineService {
         return timeline
     }
 
+    Integer countTimelines(User user) {
+        return Timeline.countByUser(user)
+    }
+
 }

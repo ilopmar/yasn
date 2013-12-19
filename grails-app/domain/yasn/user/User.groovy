@@ -4,6 +4,7 @@ class User {
 
     transient springSecurityService
     transient relationService
+    transient timelineService
 
     String username
     String password
@@ -17,7 +18,7 @@ class User {
     Date dateCreated
     Date lastUpdated
 
-    static transients = ['springSecurityService', 'relationService']
+    static transients = ['springSecurityService', 'relationService', 'timelineService']
 
     static constraints = {
         username blank: false, unique: true
@@ -55,5 +56,9 @@ class User {
 
     Integer countFollowings() {
         return relationService.countFollowings(this)
+    }
+
+    Integer countTimelines() {
+        return timelineService.countTimelines(this)
     }
 }
