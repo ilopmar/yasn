@@ -3,6 +3,7 @@ package yasn.user
 class User {
 
     transient springSecurityService
+    transient relationService
 
     String username
     String password
@@ -16,7 +17,7 @@ class User {
     Date dateCreated
     Date lastUpdated
 
-    static transients = ['springSecurityService']
+    static transients = ['springSecurityService', 'relationService']
 
     static constraints = {
         username blank: false, unique: true
@@ -46,5 +47,13 @@ class User {
 
     protected void encodePassword() {
         password = springSecurityService.encodePassword(password)
+    }
+
+    Integer countFollowers() {
+        return relationService.countFollowers(this)
+    }
+
+    Integer countFollowings() {
+        return relationService.countFollowings(this)
     }
 }

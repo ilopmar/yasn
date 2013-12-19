@@ -162,7 +162,7 @@ header div.wrapper #btnLogOut {
   text-align: justify;
   line-height: 1.5;
   color: #3f3e3d;
-  text-shadow: #3f3e3d 0 0 1px;
+  font-style: italic;
 }
 #content div.wrapper div.panel.left div.ribbitWrapper p span.spacing {
   padding-left: 9px;

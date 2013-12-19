@@ -26,4 +26,12 @@ class RelationService {
 
         yasnRedisService.addFollower(followRequest.follower, followRequest.user)
     }
+
+    Integer countFollowers(User user) {
+        return FollowRelation.countByUser(user)
+    }
+
+    Integer countFollowings(User user) {
+        return FollowRelation.countByFollower(user)
+    }
 }
