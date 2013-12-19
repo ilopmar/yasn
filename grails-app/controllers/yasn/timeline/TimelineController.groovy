@@ -33,8 +33,10 @@ class TimelineController {
     public timeline(Integer page) {
         page = page ?: 0
 
-        def tl = timelineService.timeline(springSecurityService.currentUser, page)
+        def user = springSecurityService.currentUser
 
-        render tl
+        def tl = timelineService.timeline(user, page)
+
+        render template:'/timeline/timeline', model: [user: user, timeline: tl]
     }
 }

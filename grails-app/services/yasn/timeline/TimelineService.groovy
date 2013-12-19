@@ -40,8 +40,12 @@ class TimelineService {
 
         def redisTl = yasnRedisService.timeline(user.id, start, end)
 
-        def timeline = Timeline.withCriteria {
-            'in' 'id', redisTl.findAll { it != "null" }.collect { Long.valueOf(it) }
+        def timeline = []
+        if (redisTl) {
+            timeline = Timeline.withCriteria {
+                'in' 'id', redisTl.findAll { it != "null" }.collect { Long.valueOf(it) }
+                order 'id', 'desc'
+            }
         }
 
         return timeline

@@ -1,5 +1,26 @@
-$(document).ready(function() {
+var page = 1;
 
+function infiniteScroll() {
+    $("#infinite-scroll").appear(function(e) {
+        var url = $('#timeline-wrapper').data('url');
+        var params = {'page': page};
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: params,
+            success: function(data) {
+                if (data) {
+                    page++;
+                    $('#timeline-wrapper').append(data);
+                    infiniteScroll();
+                }
+            }
+        });
+    });
+}
+
+$(document).ready(function() {
     $("#publish-form").on("submit", function(e) {
         e.preventDefault();
 
@@ -17,4 +38,6 @@ $(document).ready(function() {
             }
         });
     });
+
+    infiniteScroll();
 });

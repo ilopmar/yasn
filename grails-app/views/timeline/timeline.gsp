@@ -26,11 +26,11 @@
 
             <div class="panel left">
                 <h1>Your Yasn Buddies</h1>
-                <div id="timeline-wrapper">
-                    <g:each in="${timeline}" var="item">
-                        <g:render template="/timeline/item" model="[timeline: item]" />
-                    </g:each>
+                <div id="timeline-wrapper" data-url="${createLink(mapping:'timeline')}">
+                    <g:render template="/timeline/timeline" model="[timeline: timeline]" />
                 </div>
+
+                <div id="infinite-scroll" />
             </div>
         </div>
     </div>
