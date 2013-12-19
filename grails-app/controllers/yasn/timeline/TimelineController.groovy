@@ -27,7 +27,7 @@ class TimelineController {
 
         publishPipeline.publish(publishRequest)
 
-        render publishRequest.timeline as JSON
+        render template: '/timeline/item', model: [timeline: publishRequest.timeline, hidden: true]
     }
 
     public timeline(Integer page) {

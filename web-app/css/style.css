@@ -86,6 +86,10 @@ header div.wrapper span {
   font-size: 18px;
   margin: 0 42px 0 0;
 }
+header div.wrapper span .small {
+  font-style: italic;
+  color: #C0C0C0;
+}
 header div.wrapper form {
   display: inline;
 }
@@ -193,6 +197,11 @@ footer {
 footer div.wrapper {
   padding: 15px;
 }
-footer div.wrapper img {
-  float: right;
+footer div.wrapper .text {
+  float: left;
+  line-height: 84px;
+}
+footer div.wrapper .img {
+  float: left;
+  margin-right: 20px;
 }

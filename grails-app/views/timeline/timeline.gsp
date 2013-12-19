@@ -9,12 +9,13 @@
     </header>
     <div id="content">
         <div class="wrapper">
+
             <div id="createRibbit" class="panel right">
                 <h1>Publish some content</h1>
                 <p>
-                    <form>
-                        <textarea name="text" class="ribbitText"></textarea>
-                        <input type="submit" value="Ribbit!">
+                    <form id="publish-form" action="${createLink(mapping:'publish')}">
+                        <textarea id="text-content" name="content" class="ribbitText"></textarea>
+                        <input type="submit" value="Publish!">
                     </form>
                 </p>
             </div>
@@ -25,9 +26,11 @@
 
             <div class="panel left">
                 <h1>Your Yasn Buddies</h1>
-                <g:each in="${timeline}" var="item">
-                    <g:render template="/timeline/item" model="[timeline: item]" />
-                </g:each>
+                <div id="timeline-wrapper">
+                    <g:each in="${timeline}" var="item">
+                        <g:render template="/timeline/item" model="[timeline: item]" />
+                    </g:each>
+                </div>
             </div>
         </div>
     </div>

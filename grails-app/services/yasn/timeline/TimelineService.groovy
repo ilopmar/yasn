@@ -25,7 +25,11 @@ class TimelineService {
     PublishRequest doUpdateFollowersTimeline(PublishRequest publishRequest) {
         println "---> Updating ${publishRequest.user} followers' timelines"
 
-        yasnRedisService.updateTimeline(publishRequest.user, publishRequest.timeline)
+        def timeline = publishRequest.timeline
+        // Just in case
+        if (timeline) {
+            yasnRedisService.updateTimeline(publishRequest.user, timeline)
+        }
 
         publishRequest
     }
@@ -37,7 +41,7 @@ class TimelineService {
         def redisTl = yasnRedisService.timeline(user.id, start, end)
 
         def timeline = Timeline.withCriteria {
-            'in' 'id', redisTl.collect { Long.valueOf(it) }
+            'in' 'id', redisTl.findAll { it != "null" }.collect { Long.valueOf(it) }
         }
 
         return timeline

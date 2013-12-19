@@ -1,6 +1,6 @@
 <g:set var="user" value="${timeline.user}" />
 
-<div class="ribbitWrapper">
+<div class="ribbitWrapper" <g:if test="${hidden}">style='display:none;'</g:if>>
     <g:render template="/user/avatar" model="[user: user]" />
 
     <span class="name">${user.name}</span>
