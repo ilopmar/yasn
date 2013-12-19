@@ -13,6 +13,12 @@ class TimelineController {
     def publishPipeline
     def timelineService
 
+    public home() {
+        def timeline = timelineService.timeline(springSecurityService.currentUser, 0)
+
+        render view: '/timeline/timeline', model: [currentUser: springSecurityService.currentUser, timeline: timeline]
+    }
+
     public publish(String content) {
         def publishRequest = new PublishRequest(
             user: springSecurityService.currentUser,

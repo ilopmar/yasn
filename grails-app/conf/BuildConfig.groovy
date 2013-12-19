@@ -81,5 +81,7 @@ grails.project.dependency.resolution = {
         compile (":redis:1.4.2") {
             exclude 'jedis'
         }
+
+        compile ":pretty-time:2.1.3.Final-1.0.1"
     }
 }

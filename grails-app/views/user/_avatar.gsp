@@ -1,0 +1,1 @@
+<img class="avatar" src='${resource(dir:"avatars", file:"${user.id}.jpg")}'>
