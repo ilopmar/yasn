@@ -122,5 +122,14 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'yasn.user.User
 grails.plugin.springsecurity.authority.className = 'yasn.user.Role'
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.password.algorithm = 'bcrypt'
-grails.plugin.springsecurity.securityConfigType = 'Annotation'
-
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/timeline'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+    '/':                              ['permitAll'],
+    '/index':                         ['permitAll'],
+    '/index.gsp':                     ['permitAll'],
+    '/**/js/**':                      ['permitAll'],
+    '/**/css/**':                     ['permitAll'],
+    '/**/images/**':                  ['permitAll'],
+    '/**/gfx/**':                     ['permitAll'],
+    '/**/favicon.ico':                ['permitAll']
+]
