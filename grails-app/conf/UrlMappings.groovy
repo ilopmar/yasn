@@ -4,8 +4,8 @@ class UrlMappings {
 
         name logoutIndex: "/logout" {controller = 'logout'; action = 'index'}
 
-        name root: "/" { controller = 'login'; action = [GET: 'index'] }
-        name timeline: "/timeline" { controller = 'timeline'; action = [GET: 'home']}
+        name root: "/" { controller = 'login'; action = 'index' }
+        name home: "/home" { controller = 'timeline'; action = 'home' }
 
         "/$controller/$action?/$id?(.${format})?"{
             constraints {
