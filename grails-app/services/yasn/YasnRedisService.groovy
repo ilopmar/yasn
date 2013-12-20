@@ -21,7 +21,7 @@ class YasnRedisService {
     void updateTimeline(Set followers, Timeline timeline) {
         def t = System.nanoTime()
 
-        println "Updating the timeline of ===${followers.size()}=== followers in Redis"
+        log.info "Updating the timeline of ===${followers.size()}=== followers in Redis"
 
         String timelineId = timeline.id.toString()
 
@@ -32,18 +32,18 @@ class YasnRedisService {
             // Add timeline object to timeline followers
             followers.eachWithIndex { followerId, idx ->
                 if (idx % 10000 == 0) {
-                    println "Updating followers' timelines. Progress: ${idx}"
+                    log.debug "Updating followers' timelines. Progress: ${idx}"
                 }
                 pipeline.lpush("timeline.${followerId}", timelineId)
             }
         }
 
         def t2 = System.nanoTime()
-        println "Time --> " + ((t2 - t)/1000000)
+        log.debug "Time --> " + ((t2 - t)/1000000)
     }
 
     public Set followerIds(User user) {
-        println "Getting followers of ${user}"
+        log.debug "Getting followers of ${user}"
         return redisService.smembers("followers.${user.id}")
     }
 

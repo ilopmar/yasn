@@ -26,13 +26,13 @@ class RelationService {
     }
 
     void doUpdateFollowers(FollowRequest followRequest) {
-        println "Updating followers of ${followRequest.user} with ${followRequest.follower}"
+        log.info "Updating followers of ${followRequest.user} with ${followRequest.follower}"
 
         yasnRedisService.addFollower(followRequest.follower, followRequest.user)
     }
 
     PublishRequest doGetFollowersToNotify(PublishRequest publishRequest) {
-        println "Getting followers to notify"
+        log.info "Getting followers to notify"
 
         def user = publishRequest.user
         def timeline = publishRequest.timeline

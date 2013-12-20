@@ -32,14 +32,14 @@ class BootStrap {
         def johndoe = new User(username: 'johndoe', name: 'John Doe', password: 'pass', bio: bioJohn).save(flush: true, failOnError: true)
         UserRole.create(johndoe, role)
 
-        println "Creating users..."
+        log.info "Creating users..."
         50.times { n ->
             String name = "${fakerService.esFirstName()} ${fakerService.esLastName()}"
             def tmpUser = new User(username: "user${n}", password: 'pass', name: name, bio: fakerService.paragraph(1)).save(flush: true, failOnError: true)
             UserRole.create(tmpUser, role)
         }
 
-        println "Creating relations..."
+        log.info "Creating relations..."
         250.times {
             def userA = randomUser
             def userB = randomUser
@@ -59,7 +59,7 @@ class BootStrap {
         yasnRedisService.addFollower(johndoe, hannahmontana)
         yasnRedisService.addFollower(johndoe, justinbieber)
 
-        // Clear timelines and followes for test users
+        // Clear timelines and followers for test users
         redisService.ltrim "timeline.1", -1, 0
         redisService.ltrim "timeline.2", -1, 0
         redisService.ltrim "timeline.3", -1, 0
@@ -68,7 +68,7 @@ class BootStrap {
         redisService.del "followers.3"
 
         // Create one million followers for justin and hannah
-        println "Creating followers..."
+        log.info "Creating followers..."
         redisService.withPipeline { pipeline ->
             1000001.times {
                 pipeline.sadd "followers.1", it.toString()
@@ -89,7 +89,7 @@ class BootStrap {
             pipeline.srem "followers.3", "2"
         }
 
-        println "Creating timelines..."
+        log.info "Creating timelines..."
         1000.times { n ->
             def rndUser = randomUser
             def tl = new Timeline(user: rndUser, content: fakerService.paragraph(2)).save()
@@ -100,7 +100,7 @@ class BootStrap {
             }
         }
 
-        println "Creating timelines for users..."
+        log.info "Creating timelines for users..."
         1000.times { idx ->
             def tlJustin = this.randomNumbers()
             def tlHannah = this.randomNumbers()
@@ -109,6 +109,8 @@ class BootStrap {
             redisService.lpush "timeline.2", tlHannah[idx].toString()
             redisService.lpush "timeline.3", tlJohn[idx].toString()
         }
+
+        log.info "Test data created!"
     }
 
     private User getRandomUser() {

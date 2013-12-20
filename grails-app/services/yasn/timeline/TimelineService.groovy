@@ -23,7 +23,7 @@ class TimelineService {
     }
 
     PublishRequest doUpdateFollowersTimeline(PublishRequest publishRequest) {
-        println "---> Updating ${publishRequest.user} followers' timelines"
+        log.info "---> Updating ${publishRequest.user} followers' timelines"
 
         def timeline = publishRequest.timeline
         def followers = publishRequest.followers

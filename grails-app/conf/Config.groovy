@@ -97,9 +97,9 @@ environments {
 log4j = {
     // Example of changing the log pattern for the default console appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+       console name:'stdout', layout: pattern(conversionPattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %c{1}:%L - %m%n')
+    }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -112,6 +112,13 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+    debug  'grails.app.conf.BootStrap',
+           'grails.app.controllers.yasn',
+           'grails.app.jobs.yasn',
+           'grails.app.services.yasn',
+           'grails.app.domain.yasn',
+           'grails.app.taglib.yasn'
 }
 
 
