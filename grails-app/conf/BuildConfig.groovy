@@ -49,9 +49,6 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        // runtime 'mysql:mysql-connector-java:5.1.24'
-        runtime "org.postgresql:postgresql:9.2-1004-jdbc4"
-
         compile 'org.springframework.integration:spring-integration-core:3.0.0.RELEASE'
         compile 'redis.clients:jedis:2.2.1'
         compile 'com.twitter:twitter-text:1.6.1'
@@ -74,7 +71,6 @@ grails.project.dependency.resolution = {
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"
         //runtime ":yui-minify-resources:0.1.5"
-        compile ":postgresql-extensions:0.6.1"
 
         compile ":spring-security-core:2.0-RC2"
         compile ":faker:0.7"
