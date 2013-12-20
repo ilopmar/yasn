@@ -54,6 +54,7 @@ grails.project.dependency.resolution = {
 
         compile 'org.springframework.integration:spring-integration-core:3.0.0.RELEASE'
         compile 'redis.clients:jedis:2.2.1'
+        compile 'com.twitter:twitter-text:1.6.1'
     }
 
     plugins {

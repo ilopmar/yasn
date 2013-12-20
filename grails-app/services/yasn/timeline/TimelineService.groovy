@@ -26,10 +26,9 @@ class TimelineService {
         println "---> Updating ${publishRequest.user} followers' timelines"
 
         def timeline = publishRequest.timeline
-        // Just in case
-        if (timeline) {
-            yasnRedisService.updateTimeline(publishRequest.user, timeline)
-        }
+        def followers = publishRequest.followers
+
+        yasnRedisService.updateTimeline(followers, timeline)
 
         publishRequest
     }

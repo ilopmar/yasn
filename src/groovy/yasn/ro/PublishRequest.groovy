@@ -9,4 +9,10 @@ class PublishRequest {
 
     // The timeline created in the flow
     Timeline timeline
+
+    // Followers
+    Set followers
+
+    // The user mentioned when it's the first thing in the message
+    User mentioned
 }
