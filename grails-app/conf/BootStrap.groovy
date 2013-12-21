@@ -4,6 +4,8 @@ import yasn.user.Role
 import yasn.user.User
 import yasn.user.UserRole
 
+import grails.util.Environment
+
 class BootStrap {
 
     def fakerService
@@ -12,7 +14,9 @@ class BootStrap {
     def redisService
 
     def init = { servletContext ->
-        this.createDummyData()
+        if (Environment.current == Environment.DEVELOPMENT) {
+            this.createDummyData()
+        }
     }
 
     def destroy = {
