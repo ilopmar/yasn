@@ -5,10 +5,9 @@ import yasn.ro.FollowRequest
 import yasn.ro.PublishRequest
 import yasn.timeline.Timeline
 
-import com.twitter.Extractor
-
 class RelationService {
     def yasnRedisService
+    def timelineService
 
     void addFollower(User follower, User user) {
         FollowRelation.findOrSaveByFollowerAndUser(follower, user)
@@ -37,7 +36,7 @@ class RelationService {
         def user = publishRequest.user
         def timeline = publishRequest.timeline
 
-        def mentionedUser = this.isTimelineForAFollower(publishRequest)
+        def mentionedUser = timelineService.isTimelineForAFollower(publishRequest)
         if (mentionedUser) {
             // Get only common followers
             publishRequest.followers = yasnRedisService.commonFollowersWithUser(user, mentionedUser)
@@ -57,13 +56,4 @@ class RelationService {
         return FollowRelation.countByFollower(user)
     }
 
-    User isTimelineForAFollower(PublishRequest publishRequest) {
-        def extractor = new Extractor();
-        def content = publishRequest.timeline.content
-
-        def mentionedUsername = extractor.extractReplyScreenname(content)
-        def mentionedUser = User.findByUsername(mentionedUsername)
-
-        return mentionedUser
-    }
 }

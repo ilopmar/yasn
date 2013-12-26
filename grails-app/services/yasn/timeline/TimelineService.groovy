@@ -3,6 +3,8 @@ package yasn.timeline
 import yasn.user.User
 import yasn.ro.PublishRequest
 
+import com.twitter.Extractor
+
 class TimelineService {
 
     private static final Integer ITEMS_BY_PAGE = 10
@@ -52,6 +54,16 @@ class TimelineService {
 
     Integer countTimelines(User user) {
         return Timeline.countByUser(user)
+    }
+
+    User isTimelineForAFollower(PublishRequest publishRequest) {
+        def extractor = new Extractor();
+        def content = publishRequest.timeline.content
+
+        def mentionedUsername = extractor.extractReplyScreenname(content)
+        def mentionedUser = User.findByUsername(mentionedUsername)
+
+        return mentionedUser
     }
 
 }
