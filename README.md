@@ -45,3 +45,7 @@ If you have some comments, please send me an email at lopez.ivan@gmail.com. You 
 
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lmivan/yasn/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
