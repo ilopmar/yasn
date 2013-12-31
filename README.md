@@ -1,5 +1,7 @@
 # Yet Another Social Network
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lmivan/yasn/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 ![logo](https://raw.github.com/lmivan/yasn/master/web-app/gfx/logo.png)
 
 YASN is a Twitter-like clone developed as a proof-of-concept to create an uberfast social network.
@@ -33,19 +35,3 @@ Check the configuration files in `grails-app/conf/spring/` directory.
 ## Author
 
 If you have some comments, please send me an email at lopez.ivan@gmail.com. You can also contact with me by twitter at [@ilopmar](https://twitter.com/ilopmar).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lmivan/yasn/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
