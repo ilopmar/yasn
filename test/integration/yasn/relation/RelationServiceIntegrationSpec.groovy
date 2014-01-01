@@ -65,4 +65,24 @@ class RelationServiceIntegrationSpec extends Specification {
             1 * yasnRedisService.addFollower(follower, user)
     }
 
+    @Unroll
+    void 'check if a user is following another one'() {
+        setup:
+            def user = User.build()
+            def follower = User.build()
+
+        and: 'mock collaborator'
+            def yasnRedisService = Stub(YasnRedisService)
+            relationService.yasnRedisService = yasnRedisService
+            yasnRedisService.isFollower(follower, user) >> isFollower
+
+        when:
+            def result = relationService.isFollower(follower, user)
+
+        then:
+            result == isFollower
+
+        where:
+            isFollower << [true, false]
+    }
 }
