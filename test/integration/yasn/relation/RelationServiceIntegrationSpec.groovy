@@ -85,4 +85,43 @@ class RelationServiceIntegrationSpec extends Specification {
         where:
             isFollower << [true, false]
     }
+
+    @Unroll
+    void 'count the followings of a user when the user followings is #n'() {
+        setup:
+            def user = User.build()
+            n.times {
+                def anotherUser = User.build()
+                FollowRelation.build(follower: user, user: anotherUser)
+            }
+
+        when:
+            def followingsCount = relationService.countFollowings(user)
+
+        then:
+            followingsCount == n
+
+        where:
+            n << [0, 5]
+    }
+
+    @Unroll
+    void 'count the followers of a user when the user followers in #n'() {
+        setup:
+            def user = User.build()
+
+        and: 'mock collaborator'
+            def yasnRedisService = Stub(YasnRedisService)
+            relationService.yasnRedisService = yasnRedisService
+            yasnRedisService.countFollowers(user) >> n
+
+        when:
+            def followersCount = relationService.countFollowers(user)
+
+        then:
+            followersCount == n
+
+        where:
+            n << [0, 5]
+    }
 }
