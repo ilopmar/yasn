@@ -153,4 +153,29 @@ class RelationServiceIntegrationSpec extends Specification {
         where:
             text = "@johndoe the text"
     }
+
+    void 'notify all the followers that there is a new timeline '() {
+        setup:
+            def user = User.build()
+            def timeline = Timeline.build(user: user, content: text)
+            def publishRequest = new PublishRequest(user: user, timeline: timeline)
+
+        and: 'mock collaborator'
+            def timelineService = Stub(TimelineService)
+            relationService.timelineService = timelineService
+            timelineService.isTimelineForAFollower(publishRequest) >> null
+
+        and: 'mock collaborator'
+            def yasnRedisService = Mock(YasnRedisService)
+            relationService.yasnRedisService = yasnRedisService
+
+        when:
+            relationService.doGetFollowersToNotify(publishRequest)
+
+        then:
+            1 * yasnRedisService.followerIds(user)
+
+        where:
+            text = "the text"
+    }
 }
