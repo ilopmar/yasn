@@ -3,7 +3,10 @@ package yasn.relation
 import spock.lang.*
 
 import yasn.ro.FollowRequest
+import yasn.ro.PublishRequest
 import yasn.user.User
+import yasn.timeline.Timeline
+import yasn.timeline.TimelineService
 import yasn.YasnRedisService
 
 class RelationServiceIntegrationSpec extends Specification {
@@ -123,5 +126,31 @@ class RelationServiceIntegrationSpec extends Specification {
 
         where:
             n << [0, 5]
+    }
+
+    void 'notify all the common followers that there is a new timeline '() {
+        setup:
+            def user = User.build()
+            def timeline = Timeline.build(user: user, content: text)
+            def publishRequest = new PublishRequest(user: user, timeline: timeline)
+
+        and: 'mock collaborator'
+            def mentionedUser = User.build(username: "johndoe")
+            def timelineService = Stub(TimelineService)
+            relationService.timelineService = timelineService
+            timelineService.isTimelineForAFollower(publishRequest) >> mentionedUser
+
+        and: 'mock collaborator'
+            def yasnRedisService = Mock(YasnRedisService)
+            relationService.yasnRedisService = yasnRedisService
+
+        when:
+            relationService.doGetFollowersToNotify(publishRequest)
+
+        then:
+            1 * yasnRedisService.commonFollowersWithUser(user, mentionedUser)
+
+        where:
+            text = "@johndoe the text"
     }
 }
